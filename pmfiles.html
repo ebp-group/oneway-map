@@ -20,7 +20,7 @@
         //var map = L.map('map').setView([47.3769, 8.5417], 13); // Coordinates for Zürich
         var map = L.map('map').setView([47.2659, 11.4026], 13); // Coordinates for Innsbruck
 
-        var layer = protomapsL.leafletLayer({url:'https://api.protomaps.com/tiles/v3/{z}/{x}/{y}.mvt?key=1003762824b9687f',theme:'light'})
+        var layer = protomapsL.leafletLayer({url:'https://oneway-minio.fly.dev/oneway-map/europe.pmtiles',theme:'light'})
         layer.addTo(map)
 
 
