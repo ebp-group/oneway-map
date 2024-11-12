@@ -2,8 +2,11 @@ import overpass
 from utils import sparql
 import os
 import json
+import logging
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
 
 api = overpass.API(timeout=4000)
 
@@ -23,6 +26,7 @@ ORDER BY ?countryLabel
 result = sparql.query(query, endpoint="https://query.wikidata.org/sparql")
 european_countries = [{k: v["value"] for k, v in m.items()} for m in result]
 for country in european_countries:
+    logging.debug(f"* Query overpass for {country['countryLabel']}...")
     gj_path = os.path.join(
         __location__, "oneway_countries", f"Oneway_{country['isoCode']}.geojson"
     )
@@ -34,12 +38,13 @@ for country in european_countries:
     way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"][!"tramway"]["oneway"="yes"](area);
     out geom;
     """
-    print(query)
+    logging.debug(f" -> Query: {query}")
     try:
         response = api.get(query, responseformat="geojson")
-    except overpass.OverpassError as e:
-        print(f"Error: {e}")
+    except overpass.OverpassError:
+        logging.exception("Error from Overpass")
         continue
-    print(f"Found {len(response['features'])} features.")
+    logging.debug(f" -> Found {len(response['features'])} features.")
     with open(gj_path, "w") as f:
         f.write(json.dumps(response, indent=4))
+    logging.debug(f" -> Save GeoJSON at {gj_path}.")
