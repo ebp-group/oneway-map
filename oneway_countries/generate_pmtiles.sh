@@ -17,4 +17,4 @@ done
 
 echo "Merge all PMTiles..."
 tile-join --overzoom -z 17 -Z 5 -o $DIR/merged.pmtiles $DIR/*.pmtiles
-mv $DIR/merged.pmtiles $DIR/../output
+mv $DIR/merged.pmtiles $DIR/output

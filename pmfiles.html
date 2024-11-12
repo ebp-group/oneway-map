@@ -63,7 +63,7 @@
     let LABEL_RULES = []; // ignore for now
 
     protomapsL.leafletLayer({
-        url: "http://localhost:8000/oneway_AT.pmtiles",
+        url: "https://oneway-minio.fly.dev/oneway-map/oneway_AT.pmtiles",
         tasks:[sheet.load()],
         paintRules: PAINT_RULES,
         labelRules: LABEL_RULES
