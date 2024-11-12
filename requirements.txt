@@ -1,0 +1,11 @@
+folium
+geopandas
+jupyter
+matplotlib
+overpass
+pandas
+pyarrow
+python-dotenv
+rangehttpserver
+requests
+SPARQLWrapper==1.8.2
