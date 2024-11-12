@@ -24,3 +24,19 @@ jobs:
         cd tippecanoe
         make -j
         sudo make install
+
+    - name: Get GeoJSON from Overpass
+      run: python export_oneway_by_country.py
+
+    - name: Generate PMTiles from GeoJSONs
+      run: sh generate_pmtiles.sh
+
+    - name: Minio Deploy
+      uses: lovellfelix/minio-deploy-action@v1
+      with:
+        endpoint: ${{ secrets.MINIO_ENDPOINT }}
+        access_key: ${{ secrets.MINIO_ACCESS_KEY }}
+        secret_key: ${{ secrets.MINIO_SECRET_KEY }}
+        bucket: 'oneway-map'
+        source_dir: 'output'
+        target_dir: '/'
