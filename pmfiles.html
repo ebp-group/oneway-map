@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⛔️ Oneway Europe Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-hash@0.2.1/leaflet-hash.js"></script>
+    <script src="https://unpkg.com/protomaps-leaflet@4.0.1/dist/protomaps-leaflet.js"></script>
     <style>
         #map {
             height: 100vh;
@@ -13,14 +16,17 @@
 </head>
 <body>
     <div id="map"></div>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/protomaps-leaflet@4.0.1/dist/protomaps-leaflet.js"></script>
     <script>
         // Initialize the map
-        //var map = L.map('map').setView([47.3769, 8.5417], 13); // Coordinates for Zürich
-        var map = L.map('map').setView([47.2659, 11.4026], 13); // Coordinates for Innsbruck
-
-        var layer = protomapsL.leafletLayer({url:'https://oneway-minio.fly.dev/oneway-map/europe.pmtiles',theme:'light'})
+        var map = L.map('map')
+        //var map = L.map('map').setView([47.2659, 11.4026], 13); // Coordinates for Innsbruck
+        let hash = new L.Hash(map)
+        if (!window.location.hash) map.setView([47.3769, 8.5417], 13); // Coordinates for Zürich
+        
+        var layer = protomapsL.leafletLayer({
+            url: 'https://oneway-minio.fly.dev/oneway-map/europe.pmtiles',
+            theme: 'white',
+        })
         layer.addTo(map)
 
 
@@ -48,7 +54,7 @@
         `
 
         let sheet = new protomapsL.Sheet(ICONS);
-        sheet.load()
+        sheet.load();
 
         let PAINT_RULES = [{
             dataLayer:"oneway",
