@@ -15,8 +15,8 @@
       "url": "https://tiles.openfreemap.org/planet"
     },
     "oneway": {
-      "type": "geojson",
-      "data": "https://metaodi.ch/jupyter-playground/map/oneway_switzerland.geojson"
+      "type": "vector",
+      "data": "pmtiles://https://oneway-minio.fly.dev/oneway-map/merged.pmtiles"
     }
   },
   "sprite": "https://tiles.openfreemap.org/sprites/ofm_f384/ofm",
