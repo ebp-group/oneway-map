@@ -30,7 +30,7 @@ pmtiles show https://build.protomaps.com/20241111.pmtiles
 4. Extract euroep
 
 ```
-pmtiles extract https://build.protomaps.com/20241111.pmtiles my_area.pmtiles --bbox=-24.785156,36.315125,36.914063,71.300793 --maxzoom=14
+pmtiles extract https://build.protomaps.com/20241111.pmtiles europe.pmtiles --bbox=-24.785156,36.315125,36.914063,71.300793 --maxzoom=14
 ```
 
 Download ca. 20GB PMTiles

@@ -29,7 +29,9 @@ jobs:
       run: python export_oneway_by_country.py
 
     - name: Generate PMTiles from GeoJSONs
-      run: bash oneway_countries/generate_pmtiles.sh
+      run: | 
+        bash oneway_countries/generate_pmtiles.sh
+        mv oneway_countries/merged.pmtiles output/
 
     - name: Minio Deploy
       uses: lovellfelix/minio-deploy-action@v1
