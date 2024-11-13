@@ -1,8 +1,6 @@
 pyenv
 __pycache__
 .env
-*.png
-*.pkl
 *.geojson
 *.pmtiles
 secrets/**
