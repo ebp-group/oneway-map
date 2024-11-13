@@ -42,7 +42,8 @@ for country in european_countries:
     try:
         response = api.get(query, responseformat="geojson")
     except overpass.OverpassError:
-        logging.exception("Error from Overpass")
+        logging.exception(f"Error from Overpass for {country['countryLabel']}")
+        pause = input("**** PRESS ANY KEY TO CONTINUE ****")
         continue
     logging.debug(f" -> Found {len(response['features'])} features.")
     with open(gj_path, "w") as f:
