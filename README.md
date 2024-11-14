@@ -4,14 +4,6 @@ Oneway map using OSM data
 Source: OSM via Overpass
 
 
-## Start webserver starten
-
-For local testing, start a webserver that supports range-requests (needed for PMTiles):
-
-```
-python -m RangeHTTPServer 8000
-```
-
 ## Installation
 
 Install Python, create venv and install dependencies:
@@ -84,6 +76,14 @@ mc alias set oneway-minio https://oneway-minio.fly.dev <ROOT-USER> <ROOT-PASS>
 ```
 mc put output/europe.pmtiles oneway-minio/onway-map
 mc put output/merged.pmtiles oneway-minio/onway-map
+```
+
+### Start local webserver for testing
+
+For local testing, start a webserver that supports range-requests (needed for PMTiles):
+
+```
+python -m RangeHTTPServer 8000
 ```
 
 
