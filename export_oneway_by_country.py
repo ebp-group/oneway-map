@@ -33,14 +33,14 @@ for country in european_countries:
     if os.path.exists(gj_path):
         continue
     query = f"""
+    [timeout:600]
     rel["ISO3166-1:alpha2"="{country['isoCode']}"]["boundary"="administrative"];
     map_to_area;
     way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"]["highway"!="motorway_link"]["highway"!="path"][!"lanes"][!"tramway"][!"railway"]["oneway"="yes"](area);
-    out geom;
     """
     logging.debug(f" -> Query: {query}")
     try:
-        response = api.get(query, responseformat="geojson")
+        response = api.get(query, responseformat="geojson", verbosity="body geom")
     except overpass.OverpassError:
         logging.exception(f"Error from Overpass for {country['countryLabel']}")
         pause = input("**** PRESS ANY KEY TO CONTINUE ****")
