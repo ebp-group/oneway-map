@@ -13,14 +13,14 @@ api = overpass.API(timeout=4000)
 # get all countries in Europe from Wikidata
 # get list of swiss municipalities incl. zip code
 query = """
-SELECT ?countryLabel ?country ?isoCode
+SELECT DISTINCT ?countryLabel ?country ?isoCode
 {
-  ?country wdt:P31 wd:Q6256 .
+  ?country wdt:P31/wdt:P279* wd:Q6256 .
   ?country wdt:P30 wd:Q46 .
   ?country wdt:P297 ?isoCode .
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
-ORDER BY ?countryLabel
+ORDER BY ?isoCode
 """
 
 result = sparql.query(query, endpoint="https://query.wikidata.org/sparql")
