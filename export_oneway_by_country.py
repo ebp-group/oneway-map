@@ -35,7 +35,7 @@ for country in european_countries:
     query = f"""
     rel["ISO3166-1:alpha2"="{country['isoCode']}"]["boundary"="administrative"];
     map_to_area;
-    way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"][!"tramway"]["oneway"="yes"](area);
+    way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"]["highway"!="motorway_link"]["highway"!="path"][!"lanes"][!"tramway"][!"railway"]["oneway"="yes"](area);
     out geom;
     """
     logging.debug(f" -> Query: {query}")
