@@ -1,9 +1,0 @@
-## Zugriff via Webinterface
-
-Proxy für Port 9001 laufen lassen:
-
-```
-flyctl proxy 8080:9001
-```
-
-Anschliessend Zugriff via http://localhost:8080/
