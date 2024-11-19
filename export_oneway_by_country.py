@@ -9,7 +9,7 @@ __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
 
 api = overpass.API(timeout=4000)
-api._GEOJSON_QUERY_TEMPLATE = "[out:json][timeout:600]{date};{query}out {verbosity};"
+# api._GEOJSON_QUERY_TEMPLATE = "[out:json][timeout:600]{date};{query}out {verbosity};"
 
 # get all countries in Europe from Wikidata
 # get list of swiss municipalities incl. zip code
