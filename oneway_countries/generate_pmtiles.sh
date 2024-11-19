@@ -21,5 +21,5 @@ for country_file in $DIR/*.geojson; do
 done
 
 echo "Merge all PMTiles..."
-rm $DIR/merged.pmtiles
+rm -f $DIR/merged.pmtiles
 tile-join --overzoom -z 17 -Z 5  -o $DIR/merged.pmtiles $DIR/*.pmtiles
