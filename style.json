@@ -10858,15 +10858,29 @@
             }
         },
         {
+            "id": "oneway_color",
+            "type": "line",
+            "source": "oneway",
+            "source-layer": "oneway",
+            "layout": {"visibility": "visible"},
+            "paint": {
+              "line-color": "#7A3B69",
+              "line-opacity": 1,
+              "line-width": 10,
+              "line-blur": 10
+            }
+        },
+        {
           "id": "oneway",
           "type": "symbol",
           "source": "oneway",
           "source-layer": "oneway",
+          "minzoom": 16,
           "layout": {
             "icon-rotation-alignment": "map",
             "icon-pitch-alignment": "map",
             "symbol-placement": "line",
-            "symbol-spacing": 20,
+            "symbol-spacing": 1,
             "icon-ignore-placement": true,
             "icon-allow-overlap": true,
             "text-field": "",
@@ -10879,26 +10893,14 @@
             "icon-image": "arrow"
           },
           "paint": {
-            "icon-color": "red",
-            "text-color": "red",
-            "icon-halo-color": "red",
+            "icon-color": "#7A3B69",
+            "text-color": "#7A3B69",
+            "icon-halo-color": "#7A3B69",
             "icon-opacity": 1,
-            "text-halo-color": "red"
+            "text-halo-color": "#7A3B69"
           }
-        },
-		{
-		  "id": "oneway_color",
-		  "type": "line",
-		  "source": "oneway",
-          "source-layer": "oneway",
-		  "layout": {"visibility": "visible"},
-		  "paint": {
-			"line-color": "rgba(234, 24, 24, 1)",
-			"line-opacity": 1,
-			"line-width": 10,
-			"line-blur": 10
-		  }
-		}
+        }
+		
     ],
     "sprite": "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
     "glyphs": "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf"
