@@ -3,4 +3,5 @@ __pycache__
 .env
 *.geojson
 *.pmtiles
+*.pmtiles-journal
 secrets/**
