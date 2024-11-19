@@ -24,6 +24,12 @@ jobs:
         cd tippecanoe
         make -j
         sudo make install
+    - name: Install MinIO client mc
+      run: |
+        wget https://dl.min.io/client/mc/release/linux-amd64/mc
+        chmod +x mc
+        sudo mv mc /usr/local/bin/
+        mc --help
 
     - name: Get GeoJSON from Overpass (w/o France)
       run: python export_oneway_by_country.py
@@ -36,12 +42,11 @@ jobs:
         bash oneway_countries/generate_pmtiles.sh
         mv oneway_countries/merged.pmtiles output/
 
-    - name: Minio Deploy
-      uses: lovellfelix/minio-deploy-action@v1
-      with:
-        endpoint: ${{ secrets.MINIO_ENDPOINT }}
-        access_key: ${{ secrets.MINIO_ACCESS_KEY }}
-        secret_key: ${{ secrets.MINIO_SECRET_KEY }}
-        bucket: 'oneway-map'
-        source_dir: 'output'
-        target_dir: '/'
+    - name: Minio Upload
+      env:
+        MINIO_ENDPOINT: ${{ secrets.MINIO_ENDPOINT }}
+        MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
+        MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
+      run: |
+        mc alias set deploy "$MINIO_ENDPOINT" "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
+        mc mirror --overwrite output "deploy/oneway-map/"
