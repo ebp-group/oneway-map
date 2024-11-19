@@ -3,46 +3,51 @@ from utils import sparql
 import os
 import json
 import logging
+import time
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
 
 api = overpass.API(timeout=4000)
-# api._GEOJSON_QUERY_TEMPLATE = "[out:json][timeout:600]{date};{query}out {verbosity};"
 
-# get all countries in Europe from Wikidata
-# get list of swiss municipalities incl. zip code
+# get all part of France from Wikidata
 query = """
-SELECT DISTINCT ?countryLabel ?country ?isoCode
+SELECT DISTINCT ?regionLabel ?region ?isoCode
 {
-  ?country wdt:P31/wdt:P279* wd:Q6256 .
-  ?country wdt:P30 wd:Q46 .
-  ?country wdt:P297 ?isoCode FILTER(?isoCode != "FR") .  # exclude France, since we use a separate script for France
+  ?region wdt:P31/wdt:P279* wd:Q36784 . # Region in France
+  ?region wdt:P300 ?isoCode .
+  FILTER NOT EXISTS {
+    ?region wdt:P31/wdt:P279* wd:Q202216 . # oversea territory
+  }
+  FILTER NOT EXISTS {
+    ?region wdt:P1366 ?endDate . # replacedBy
+  }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
 ORDER BY ?isoCode
 """
 
 result = sparql.query(query, endpoint="https://query.wikidata.org/sparql")
-european_countries = [{k: v["value"] for k, v in m.items()} for m in result]
-for country in european_countries:
-    logging.debug(f"* Query overpass for {country['countryLabel']}...")
+regions = [{k: v["value"] for k, v in m.items()} for m in result]
+for region in regions:
+    logging.debug(f"* Query overpass for {region['regionLabel']}...")
     gj_path = os.path.join(
-        __location__, "oneway_countries", f"Oneway_{country['isoCode']}.geojson"
+        __location__, "oneway_countries", f"Oneway_{region['isoCode']}.geojson"
     )
     if os.path.exists(gj_path):
         continue
     query = f"""
-    rel["ISO3166-1:alpha2"="{country['isoCode']}"]["boundary"="administrative"];
+    rel["ISO3166-2"="{region['isoCode']}"]["boundary"="administrative"];
     map_to_area;
     way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"]["highway"!="motorway_link"]["highway"!="path"][!"lanes"][!"tramway"][!"railway"]["oneway"="yes"](area);
     """
     logging.debug(f" -> Query: {query}")
     try:
         response = api.get(query, responseformat="geojson", verbosity="body geom")
+        time.sleep(5)
     except overpass.OverpassError:
-        logging.exception(f"Error from Overpass for {country['countryLabel']}")
+        logging.exception(f"Error from Overpass for {region['regionLabel']}")
         pause = input("**** PRESS ANY KEY TO CONTINUE ****")
         continue
     logging.debug(f" -> Found {len(response['features'])} features.")

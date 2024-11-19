@@ -25,8 +25,11 @@ jobs:
         make -j
         sudo make install
 
-    - name: Get GeoJSON from Overpass
+    - name: Get GeoJSON from Overpass (w/o France)
       run: python export_oneway_by_country.py
+
+    - name: Get GeoJSON from Overpass (France)
+      run: python export_oneway_france.py
 
     - name: Generate PMTiles from GeoJSONs
       run: | 
