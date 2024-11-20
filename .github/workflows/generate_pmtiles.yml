@@ -20,7 +20,7 @@ jobs:
 
       - id: set-matrix
         run: |
-          matrix=$(./workflow/build_matrix.py | jq -c '.')
+          matrix=$(./build_matrix.py | jq -c '.')
           echo $matrix
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
     outputs:
