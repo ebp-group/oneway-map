@@ -1,0 +1,13 @@
+SELECT DISTINCT ?regionLabel ?region ?isoCode
+{
+  ?region wdt:P31/wdt:P279* wd:Q36784 . # Region in France
+  ?region wdt:P300 ?isoCode .
+  FILTER NOT EXISTS {
+    ?region wdt:P31/wdt:P279* wd:Q202216 . # oversea territory
+  }
+  FILTER NOT EXISTS {
+    ?region wdt:P1366 ?endDate . # replacedBy
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?isoCode

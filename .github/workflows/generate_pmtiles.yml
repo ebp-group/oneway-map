@@ -32,10 +32,10 @@ jobs:
         mc --help
 
     - name: Get GeoJSON from Overpass (w/o France)
-      run: python export_oneway_by_country.py
+      run: python export_oneway.py -r europe.sparql -o oneway_country.overpassql
 
     - name: Get GeoJSON from Overpass (France)
-      run: python export_oneway_france.py
+      run: python export_oneway.py -r france.sparql -o oneway_regions.overpassql
 
     - name: Generate PMTiles from GeoJSONs
       run: | 

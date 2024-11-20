@@ -1,0 +1,8 @@
+SELECT DISTINCT ?regionLabel ?region ?isoCode
+{
+  ?region wdt:P31/wdt:P279* wd:Q6256 . # is a country or a subclass of country
+  ?region wdt:P30 wd:Q46 .            # located in europe
+  ?region wdt:P297 ?isoCode FILTER(?isoCode != "FR") .  # exclude France, since we use a separate script for France
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+ORDER BY ?isoCode
