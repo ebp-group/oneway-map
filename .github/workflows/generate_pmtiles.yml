@@ -56,7 +56,7 @@ jobs:
           sudo make install
       
       - name: Get GeoJSON from Overpass
-        run: python export_oneway.py -i ${{ matrix.iso-code }} -o ${{ matrix.overpass-file }}
+        run: python export_oneway.py -i ${{ matrix.isoCode }} -r ${{ matrix.regionLabel}} -o ${{ matrix.overpass_query }}
 
       - name: Convert GeoJSON to PMTiles
         run: ./oneway_counties/generate_pmtiles.sh
