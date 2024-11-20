@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
-          name: output-${{ matrix.iso-code }}
+          name: output-${{ matrix.isoCode }}
           path: |
             oneway_countries/*.pmtiles
 
