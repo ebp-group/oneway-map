@@ -19,7 +19,3 @@ for country_file in $DIR/*.geojson; do
     echo "Convert ${country_file} to PMTiles..."
     tippecanoe --projection=EPSG:4326 -o "${country_file}.pmtiles" -l oneway --minimum-zoom=2 --maximum-zoom=18 --drop-densest-as-needed $country_file
 done
-
-echo "Merge all PMTiles..."
-rm -f $DIR/merged.pmtiles
-tile-join --overzoom -z 17 -Z 5  -o $DIR/merged.pmtiles $DIR/*.pmtiles
