@@ -67,7 +67,7 @@ jobs:
         with:
           name: output-${{ matrix.iso-code }}
           path: |
-            output/*.pmtiles
+            *.pmtiles
 
   merge_data:
     needs: oneway_data
