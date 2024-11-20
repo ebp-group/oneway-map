@@ -1,6 +1,7 @@
 pyenv
 __pycache__
 .env
+*.pyc
 *.geojson
 *.pmtiles
 *.pmtiles-journal
