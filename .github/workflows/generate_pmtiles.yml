@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
-      fail-fast: false
+      fail-fast: true
       max-parallel: 10
       matrix: ${{fromJSON(needs.build-matrix.outputs.matrix)}}
 
