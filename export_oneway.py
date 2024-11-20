@@ -37,7 +37,6 @@ gj_path = os.path.join(
 )
 if not arguments["--force"] and os.path.exists(gj_path):
     logging.debug(f" -> File {gj_path} already exists, skipping (use --force to overwrite files)")
-    continue
 
 with open(arguments["--overpass-query"]) as oq:
     overpass_text = oq.read()
@@ -48,8 +47,7 @@ try:
     response = api.get(overpass_query, responseformat="geojson", verbosity="body geom")
 except overpass.OverpassError:
     logging.exception(f"Error from Overpass for {region['regionLabel']}")
-    pause = input("**** PRESS ANY KEY TO CONTINUE ****")
-    continue
+    raise
 logging.debug(f" -> Found {len(response['features'])} features.")
 with open(gj_path, "w") as f:
     f.write(json.dumps(response, indent=4))
