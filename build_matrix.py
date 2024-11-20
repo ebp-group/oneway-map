@@ -25,7 +25,8 @@ def load_file(path):
 
 matrix_config = []
 for r, r_config in config.items():
-    query = load_file(r_config["region_query"])
+    region_path = os.path.join(__location__, r_config["region_query"])
+    query = load_file(region_path)
 
     result = sparql.query(query, endpoint="https://query.wikidata.org/sparql")
     regions = [{k: v["value"] for k, v in m.items()} for m in result]
@@ -36,5 +37,5 @@ for r, r_config in config.items():
     matrix_config.extend(regions)
 
 # output matrix as JSON
-matrix = {"include": regions}
+matrix = {"include": matrix_config}
 print(json.dumps(matrix))
