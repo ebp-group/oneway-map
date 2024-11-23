@@ -1,3 +1,3 @@
 rel["ISO3166-2"="{iso}"]["boundary"="administrative"];
 map_to_area;
-way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"]["highway"!="motorway_link"]["highway"!="path"]["highway"!="cycleway"]["highway"!="service"]["highway"!="steps"][!"lanes"][!"tramway"][!"railway"][!"proposed"]["oneway"="yes"](area);
+way["highway"!="motorway"]["highway"!="trunk"]["highway"!="primary_link"]["highway"!="motorway_link"]["highway"!="path"]["highway"!="footway"]["highway"!="pedestrian"]["highway"!="cycleway"]["highway"!="service"]["highway"!="steps"][!"lanes"][!"tramway"][!"railway"][!"proposed"]["route"!="ferry"]["was:route"!="ferry"]["oneway"="yes"](area);
