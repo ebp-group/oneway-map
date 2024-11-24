@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
     <title>Oneway Map Europe</title>
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" />
@@ -41,15 +41,15 @@
         });
 
         // load arrow image
-        map.loadImage('arrow.png', function(error, image) {
+        map.loadImage('assets/arrow.png', function(error, image) {
             if (error) throw error;
             map.addImage('arrow', image, {pixelRation: 0.25});
         });
-        map.loadImage('arrow_invert.png', function(error, image) {
+        map.loadImage('assets/arrow_invert.png', function(error, image) {
             if (error) throw error;
             map.addImage('arrow_invert', image, {pixelRation: 0.25});
         });
-        map.loadImage('white-arrow.png', function(error, image) {
+        map.loadImage('assets/white-arrow.png', function(error, image) {
             if (error) throw error;
             map.addImage('arrow_white', image, {pixelRation: 0.25});
         });
@@ -63,8 +63,6 @@
           // The little line in the bottom showing how long a metre (or somesuch) is on
           // the map.
           map.addControl(new maplibregl.ScaleControl({ unit: "metric" }));
-          // Button to make the map fullscreen
-          map.addControl(new maplibregl.FullscreenControl());
         });
 
     </script>
