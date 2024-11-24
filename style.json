@@ -10875,7 +10875,7 @@
           "type": "symbol",
           "source": "oneway",
           "source-layer": "oneway",
-          "minzoom": 16,
+          "minzoom": 15,
           "layout": {
             "icon-rotation-alignment": "map",
             "icon-pitch-alignment": "map",
