@@ -38,7 +38,8 @@ gj_path = os.path.join(
 if not arguments["--force"] and os.path.exists(gj_path):
     logging.debug(f" -> File {gj_path} already exists, skipping (use --force to overwrite files)")
 
-with open(arguments["--overpass-query"]) as oq:
+query_path = os.path.join(__location__, "queries", arguments["--overpass-query"])
+with open(query_path) as oq:
     overpass_text = oq.read()
     overpass_query = overpass_text.format(iso=iso_code)
 

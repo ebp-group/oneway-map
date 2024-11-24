@@ -25,7 +25,7 @@ def load_file(path):
 
 matrix_config = []
 for r, r_config in config.items():
-    region_path = os.path.join(__location__, r_config["region_query"])
+    region_path = os.path.join(__location__, "queries", r_config["region_query"])
     query = load_file(region_path)
 
     result = sparql.query(query, endpoint="https://query.wikidata.org/sparql")
