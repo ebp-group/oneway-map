@@ -1,7 +1,7 @@
 Oneway map using OSM data
 =========================
 
-Source: OSM via Overpass
+📖 Blogpost about this project (in German!): https://digital.ebp.ch/2024/11/25/dynamische-karte-mit-pmtiles-und-protomaps-erstellen/
 
 
 ## Installation
