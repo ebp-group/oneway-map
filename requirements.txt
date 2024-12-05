@@ -4,6 +4,7 @@ geopandas
 jupyter
 matplotlib
 overpass
+osmapi
 pandas
 pyarrow
 python-dotenv
