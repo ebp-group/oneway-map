@@ -10890,7 +10890,7 @@
             "icon-size": 0.5,
             "text-pitch-alignment": "map",
             "icon-rotate": 0,
-            "icon-image": "arrow-white"
+            "icon-image": "arrow-black"
           },
           "paint": {
             "icon-color": "#7A3B69",
